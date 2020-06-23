@@ -2,7 +2,7 @@
 22nd June 2020
 
 ### Project Title
-Udacity's Programming for Data Science Bikeshare project
+**Udacity's Programming for Data Science Bikeshare project**
 
 ### Description
 My project let's users to run stats and analysis of bike sharing stats. What's included:
