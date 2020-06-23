@@ -5,7 +5,7 @@
 Udacity's Programming for Data Science Bikeshare project
 
 ### Description
-My project let's users to run stats and analysis of bike sharing stats. What's provided:
+My project let's users to run stats and analysis of bike sharing stats. What's included:
 - Most popular stations,
 - Travel times,
 - Statistics on users,
