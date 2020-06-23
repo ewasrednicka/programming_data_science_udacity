@@ -1,15 +1,24 @@
 ### Date created
-Include the date you created this project and README file.
+22nd June 2020
 
 ### Project Title
-Replace the Project Title
+Udacity's Programming for Data Science Bikeshare project
 
 ### Description
-Describe what your project is about and what it does
+My project let's users to run stats and analysis of bike sharing stats. What's provided:
+- Most popular stations,
+- Travel times,
+- Statistics on users,
+- Displaying raw data.
 
 ### Files used
-Include the files used
+- `bikeshare.py` - Solution
+- `washington.csv` - File with data for Washington (not added to the repository)
+- `new_york_city.csv` - File with data for New York City (not added to the repository)
+- `chicago.csv` - File with data for Chicago (not added to the repository)
+- `.gitignore` - Definition of files to be ignored
+- `README.md` - This file
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+This solution has been created under [Udacity Programming for Data Science](https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104) nanodegree.
 
