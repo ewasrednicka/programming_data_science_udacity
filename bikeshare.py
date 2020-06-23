@@ -9,10 +9,11 @@ CITY_WASHINGTON = 'washington'
 MONTHS_ALL = -1
 MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
 
+
 def month_name(month):
     """
     Returns name of the month.
-    
+
     Args:
         (int) month - number of a month
     Returns:
@@ -20,28 +21,33 @@ def month_name(month):
     """
     return MONTHS[month - 1].capitalize()
 
+
 WEEKDAYS_ALL = -1
-WEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+WEEKDAYS = ['monday', 'tuesday', 'wednesday',
+            'thursday', 'friday', 'saturday', 'sunday']
+
 
 def weekday_name(day):
     """
     Returns name of the week.
-    
+
     Args:
         (int) day - number of a week day
     Returns:
         (str) str - Capitalized name of a given week day
     """
-    return WEEKDAYS[day].capitalize();
+    return WEEKDAYS[day].capitalize()
 
-CITY_DATA = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+
+CITY_DATA = {'chicago': 'chicago.csv',
+             'new york city': 'new_york_city.csv',
+             'washington': 'washington.csv'}
+
 
 def format_hour(hour):
     """
     Returns formatted hour name in a 12-hour format (including AM/PM).
-    
+
     Args:
         (int) hour - day hour in 24 hours format
     Returns:
@@ -54,41 +60,43 @@ def format_hour(hour):
     else:
         t = 'AM' if hour < 12 else 'PM'
         formatted_hour = '{} {}'.format(hour, t)
-    
+
     return formatted_hour
+
 
 def format_seconds(secs):
     """
     Returns more readable version of the seconds value,
     converting them to hours : minuts : seconds format.
-    
+
     Args:
         (int) seconds - value of seconds to format
     Returns:
         (str) formatted_seconds - formatted seconds string
     """
-    
-    if isinstance(secs, int):    
+
+    if isinstance(secs, int):
         minutes, seconds = divmod(secs, 60)
         hours, minutes = divmod(minutes, 60)
         days, hours = divmod(hours, 24)
 
         formatted_seconds = ''
-        
+
         if days > 0:
             formatted_seconds += '{} days, '.format(days)
         if hours > 0:
             formatted_seconds += '{} hours, '.format(hours)
         if minutes > 0:
-            formatted_seconds += '{} minutes and '.format(minutes)    
+            formatted_seconds += '{} minutes and '.format(minutes)
 
         formatted_seconds += '{} seconds'.format(seconds)
     else:
         formatted_seconds = '(wrong value provided)'
-        
+
     return formatted_seconds
 
-### Definitions 
+# Definitions
+
 
 def get_filters():
     """
@@ -111,10 +119,11 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
+
 def get_city():
     """
     Requests user to provide a city name.
-    
+
     Returns:
         (str) city - name of the city to analize the data for.
     """
@@ -133,97 +142,112 @@ def get_city():
             break
         else:
             # When wrong name is selected, we print the note to the user run the loop once again.
-            print('You entered "{}", but it is not a valid option. Please select a valid name as shown.'.format(user_city))
+            print('You entered "{}", but it is not a valid option. Please select a valid name as shown.'.format(
+                user_city))
             continue
-    
+
     print('You selected "{}". So I will use it in my analysis!'.format(city))
-    
+
     return city
+
 
 def get_month():
     """
     Requests user to provide a month number, or 'a' for not using months filter.
-    
+
     Returns:
         (str) month - name of the month to analyze the data for, or 'all' to skip this filter.
     """
     # First check whether we should use months for filters
     while True:
-        filter_type = input('Do you want to [f]ilter the data by month or use [a]ll months?\n').lower()
+        filter_type = input(
+            'Do you want to [f]ilter the data by month or use [a]ll months?\n').lower()
         if filter_type == 'f':
             # If we do, ask for which month
             while True:
                 try:
-                    user_month = int(input('Which month should we use (1 - January, ..., 6 - June)?\n'))
+                    user_month = int(
+                        input('Which month should we use (1 - January, ..., 6 - June)?\n'))
                 except ValueError:
                     print("Please, use numbers only.")
                     continue
 
                 if user_month in range(1, 7):
                     month = user_month
-                    print('You selected "{}", meaning {}. So I will use it in my analysis!'.format(month, month_name(month).capitalize()))
+                    print('You selected "{}", meaning {}. So I will use it in my analysis!'.format(
+                        month, month_name(month).capitalize()))
                     break
                 else:
-                   print('You entered "{}", but it is not a valid option. Please select a  number between 1 and 6.'.format(user_month))
+                    print('You entered "{}", but it is not a valid option. Please select a  number between 1 and 6.'.format(
+                        user_month))
             break
         # Or we use 'all' for not using filters
         elif filter_type == 'a':
             month = MONTHS_ALL
-            print('Fine, I will not use any filters for months. We will use all available data')
+            print(
+                'Fine, I will not use any filters for months. We will use all available data')
             break
         else:
-            print('You entered "{}", but it is not a valid option. Please select a valid option as shown.'.format(filter_type))
+            print('You entered "{}", but it is not a valid option. Please select a valid option as shown.'.format(
+                filter_type))
             continue
-        
+
     return month
+
 
 def get_day():
     """
     Requests user to provide a day number for filtering, or 'a' for not using days filter.
-    
+
     Returns:
         (str) day - name of the day to analyze the data for, or 'all' to skip this filter.
     """
     # First check whether we should use week days for filters
     while True:
-        filter_type = input('Do you want to [f]ilter the data by week day or use [a]ll week\'s data?\n').lower()
+        filter_type = input(
+            'Do you want to [f]ilter the data by week day or use [a]ll week\'s data?\n').lower()
         if filter_type == 'f':
             # If we do, ask for which week day
             while True:
                 try:
-                    user_day = int(input('Which week day should we use (1 - Monday, ..., 6 - Saturday, 7 - Sunday)?\n'))
+                    user_day = int(input(
+                        'Which week day should we use (1 - Monday, ..., 6 - Saturday, 7 - Sunday)?\n'))
                 except ValueError:
                     print("Please, use numbers only.")
                     continue
 
                 if user_day in range(1, 8):
                     week_day = user_day - 1
-                    print('You selected "{}", meaning {}. So I will use it in my analysis!'.format(week_day, weekday_name(week_day).capitalize()))
+                    print('You selected "{}", meaning {}. So I will use it in my analysis!'.format(
+                        week_day, weekday_name(week_day).capitalize()))
                     break
                 else:
-                   print('You entered "{}", but it is not a valid option. Please select a  number between 1 and 7.'.format(user_day))
+                    print('You entered "{}", but it is not a valid option. Please select a  number between 1 and 7.'.format(
+                        user_day))
             break
         # Or we use 'all' for not using filters
         elif filter_type == 'a':
             week_day = WEEKDAYS_ALL
-            print('Fine, I will not use any filters for week days. We will use all week\'s data')
+            print(
+                'Fine, I will not use any filters for week days. We will use all week\'s data')
             break
         else:
-            print('You entered "{}", but it is not a valid option. Please select a valid option as shown.'.format(filter_type))
+            print('You entered "{}", but it is not a valid option. Please select a valid option as shown.'.format(
+                filter_type))
             continue
-        
+
     return week_day
 
 
-### Loading data
+# Loading data
 
 def load_data(city):
     """
     Loads data for a given city.
-    
+
     Args:
         (str) city - name of the city to analyze
-    
+
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
@@ -244,20 +268,20 @@ def load_data(city):
 def apply_filters(df, city, month, day):
     """
     Apply filters to a given city.
-    
+
     Args:
         (dataframe) df - Pandas DataFrame containing city data (non filtered)
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or -1 to apply no month filter
         (str) day - name of the day of week to filter by, or -1 to apply no day filter
-        
+
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df_origin = df
-    
-    # filter by month if applicable    
-    if month != MONTHS_ALL:    
+
+    # filter by month if applicable
+    if month != MONTHS_ALL:
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -265,17 +289,17 @@ def apply_filters(df, city, month, day):
     if day != WEEKDAYS_ALL:
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day]
-    
+
     # Print out summary of the data set
     summarize(df_origin, df, city, month, day)
-    
+
     return df
 
 
 def summarize(original_df, filtered_df, city, month, day):
     """
     Apply filters to a given city.
-    
+
     Args:
         (dataframe) original_df - Pandas DataFrame containing city data (non filtered)
         (dataframe) filtered_df - Pandas DataFrame containing city data (filtered)
@@ -285,24 +309,25 @@ def summarize(original_df, filtered_df, city, month, day):
     """
     print('-'*40)
     print('  Creating statistics for {}'.format(city.capitalize()))
-    
+
     if month != MONTHS_ALL:
         print('  - Selected month(s): {}'.format(month_name(month).capitalize()))
     else:
         print('  - Selected month(s): All, filters for months are not used')
-        
+
     if day != WEEKDAYS_ALL:
         print('  - Selected week day(s) -> {}'.format(weekday_name(day).capitalize()))
     else:
         print('  - Selected week day(s) -> All, filters for week days are not used')
-    
+
     print('  - Number of rides in the original data set: {}'.format(len(original_df)))
-    
+
     if month != MONTHS_ALL or day != WEEKDAYS_ALL:
         print('  Number of rides in the filtered data set: {}'.format(len(filtered_df)))
     print('-'*40)
 
-### Calculations
+# Calculations
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -333,11 +358,13 @@ def station_stats(df):
     start_time = time.time()
 
     all_rides = len(df)
-    
+
     # DONE: display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
-    popular_start_station_rides = df['Start Station'].value_counts()[popular_start_station]
-    popular_start_station_rides_per = (popular_start_station_rides / all_rides) * 100
+    popular_start_station_rides = df['Start Station'].value_counts()[
+        popular_start_station]
+    popular_start_station_rides_per = (
+        popular_start_station_rides / all_rides) * 100
     print('  - Start station: {} had {} rides out of {} (hence {:.2f}% of total rides)'
           .format(popular_start_station,
                   popular_start_station_rides,
@@ -346,8 +373,10 @@ def station_stats(df):
 
     # DONE: display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
-    popular_end_station_rides = df['End Station'].value_counts()[popular_end_station]
-    popular_end_station_rides_per = (popular_end_station_rides / all_rides) * 100
+    popular_end_station_rides = df['End Station'].value_counts()[
+        popular_end_station]
+    popular_end_station_rides_per = (
+        popular_end_station_rides / all_rides) * 100
     print('  - End station: {} had {} rides out of {} (hence {:.2f}% of total rides)'
           .format(popular_end_station,
                   popular_end_station_rides,
@@ -355,9 +384,9 @@ def station_stats(df):
                   popular_end_station_rides_per))
 
     # DONE: display most frequent combination of start station and end station trip
-    df_start_end_stations = df.groupby(['Start Station', 'End Station'])['Start Time'].size().nlargest(1)
-    
-    
+    df_start_end_stations = df.groupby(['Start Station', 'End Station'])[
+        'Start Time'].size().nlargest(1)
+
     print('  - The most popular trip is from {} to {} with {} rides'
           .format(df_start_end_stations.index.values[0][0],
                   df_start_end_stations.index.values[0][1],
@@ -392,7 +421,7 @@ def user_stats(df):
     start_time = time.time()
 
     all_users = len(df)
-    
+
     # DONE: Display counts of user types
     print('  - User types:')
     user_types = df['User Type'].value_counts()
@@ -400,7 +429,8 @@ def user_stats(df):
         user_type = user_types.index[type]
         type_value = user_types[type]
         type_percent = (type_value / all_users) * 100
-        print('    - {}, number of users of this type: {} ({:.2f}%)'.format(user_type, type_value, type_percent))
+        print('    - {}, number of users of this type: {} ({:.2f}%)'.format(user_type,
+                                                                            type_value, type_percent))
 
     # DONE: Display counts of gender
     # Washington does not have such column, so we need to check for it
@@ -411,8 +441,9 @@ def user_stats(df):
             user_gender = user_gendres.index[gender]
             gender_value = user_gendres[gender]
             gender_percent = (gender_value / all_users) * 100
-            print('    - {}, number of users of this gender: {} ({:.2f}%)'.format(user_gender, gender_value, gender_percent))
-    
+            print('    - {}, number of users of this gender: {} ({:.2f}%)'.format(
+                user_gender, gender_value, gender_percent))
+
     # DONE: Display earliest, most recent, and most common year of birth
     # Washington does not have such column, so we need to check for it
     if 'Birth Year' in df.columns:
@@ -446,4 +477,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
