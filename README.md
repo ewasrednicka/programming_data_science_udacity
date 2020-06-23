@@ -20,5 +20,5 @@ My project let's users to run stats and analysis of bike sharing stats. What's i
 - `README.md` - This file
 
 ### Credits
-This solution has been created under [Udacity Programming for Data Science](https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104) nanodegree.
+This solution has been created by Ewa under [Udacity Programming for Data Science](https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104) nanodegree.
 
