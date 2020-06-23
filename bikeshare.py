@@ -430,7 +430,8 @@ def user_stats(df):
         type_value = user_types[type]
         type_percent = (type_value / all_users) * 100
         print('    - {}, number of users of this type: {} ({:.2f}%)'.format(user_type,
-                                                                            type_value, type_percent))
+                                                                            type_value,
+                                                                            type_percent))
 
     # DONE: Display counts of gender
     # Washington does not have such column, so we need to check for it
@@ -442,7 +443,9 @@ def user_stats(df):
             gender_value = user_gendres[gender]
             gender_percent = (gender_value / all_users) * 100
             print('    - {}, number of users of this gender: {} ({:.2f}%)'.format(
-                user_gender, gender_value, gender_percent))
+                user_gender,
+                gender_value,
+                gender_percent))
 
     # DONE: Display earliest, most recent, and most common year of birth
     # Washington does not have such column, so we need to check for it
